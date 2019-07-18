@@ -1,5 +1,7 @@
 spring:
   profiles: default
+  application:
+    name: currency-service
   datasource:
     test-on-borrow: true
     validation-query: SELECT 1 FROM dual
@@ -20,26 +22,17 @@ fixerio:
     url: http://data.fixer.io/api/latest?access_key=
     apikey: b11a888bc2599f57e7a37baf1f4fc410
 
-#  application:
-#    name: account-service
-#  logging:
-#    pattern:
-#      console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([${springAppName:-},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}]){yellow} %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
-#    level:
-#      org.springframework: WARN
-#      org.hibernate: WARN
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
 
-#eureka:
-#  client:
-#    serviceUrl:
-#      defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
-#  instance:
-#    leaseRenewalIntervalInSeconds: 1
-#    leaseExpirationDurationInSeconds: 2
-#
-#ribbon:
-#  eureka:
-#    enabled: true
-#
-#server:
-#  port: ${PORT:2223}
+ribbon:
+  eureka:
+    enabled: true
+
+server:
+  port: ${PORT:2223}

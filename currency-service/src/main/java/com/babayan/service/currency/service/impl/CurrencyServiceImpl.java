@@ -19,6 +19,7 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * @author by artbabayan
@@ -78,6 +79,14 @@ public class CurrencyServiceImpl implements CurrencyService {
         }
 
         return mapper.fromEntity(entity);
+    }
+
+    /**
+     * @see CurrencyService#findAll()
+     */
+    @Override
+    public List<Currency> findAll() {
+        return mapper.fromEntities(repository.findAll());
     }
 
     /**
