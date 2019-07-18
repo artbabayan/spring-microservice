@@ -1,8 +1,5 @@
 package com.babayan.service.currency.common.exception;
 
-/**
- * @author by artbabayan
- */
 public class ValidationException extends IllegalArgumentException {
     public ValidationException() {
         super();

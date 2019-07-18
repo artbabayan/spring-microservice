@@ -1,4 +1,4 @@
-package com.babayan.service.currency.util;
+package com.babayan.service.currency.util.helpers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

@@ -2,7 +2,6 @@ package com.babayan.service.currency.service.impl;
 
 import com.babayan.service.currency.common.exception.OperationFailedException;
 import com.babayan.service.currency.common.exception.ValidationException;
-import com.babayan.service.currency.configuration.MapperConfig;
 import com.babayan.service.currency.dto.Currency;
 import com.babayan.service.currency.entity.CurrencyEntity;
 import com.babayan.service.currency.repository.CurrencyRepository;
@@ -46,6 +45,9 @@ public class CurrencyServiceImpl implements CurrencyService {
 
     // region <SERVICE>
 
+    /**
+     * @see CurrencyService#create(Currency)
+     */
     @Transactional
     @Override
     public Currency create(@Valid @NotNull Currency currency) {
@@ -54,21 +56,33 @@ public class CurrencyServiceImpl implements CurrencyService {
         }
 
         CurrencyEntity entity = mapper.toEntity(currency);
-        entity = repository.save(entity);
-
-        return mapper.fromEntity(entity);
-    }
-
-    @Override
-    public Currency findById(Long id) {
-        CurrencyEntity entity = repository.findOne(id);
-        if (entity == null) {
-            throw new EntityNotFoundException(String.format("User with id %s not found", id));
+        try {
+            entity = repository.save(entity);
+            _logger.info("Currency was successfully created");
+        } catch (Exception ex) {
+            _logger.error(ex.getMessage(), ex);
+            throw new OperationFailedException(ex);
         }
 
         return mapper.fromEntity(entity);
     }
 
+    /**
+     * @see CurrencyService#findById(Long)
+     */
+    @Override
+    public Currency findById(Long id) {
+        CurrencyEntity entity = repository.findOne(id);
+        if (entity == null) {
+            throw new EntityNotFoundException(String.format("Currency with id %s not found", id));
+        }
+
+        return mapper.fromEntity(entity);
+    }
+
+    /**
+     * @see CurrencyService#deleteById(Long)
+     */
     @Override
     public void deleteById(Long id) {
         try {
@@ -79,6 +93,9 @@ public class CurrencyServiceImpl implements CurrencyService {
         }
     }
 
+    /**
+     * @see CurrencyService#countByServiceDate(String)
+     */
     @Override
     public int countByServiceDate(String serviceDate) {
         return repository.countByServiceDate(serviceDate);

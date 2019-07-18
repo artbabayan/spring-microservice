@@ -13,5 +13,4 @@ public interface RateService {
 
     void addRates(Long currencyId, List<Rate> rates);
 
-    void generateCurrencyRates();
 }

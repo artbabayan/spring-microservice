@@ -17,7 +17,6 @@ public class CurrencyMapper {
     @Autowired public void setModelMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
-    // region <CURRENCY TRANSFORMER>
 
     public Currency fromEntity(CurrencyEntity entity) {
         if (entity == null) {
@@ -41,7 +40,5 @@ public class CurrencyMapper {
 
         return dtoList;
     }
-
-    // endregion
 
 }

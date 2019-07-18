@@ -5,7 +5,6 @@ import com.babayan.service.currency.common.exception.ValidationException;
 import com.babayan.service.currency.dto.Currency;
 import com.babayan.service.currency.dto.Rate;
 import com.babayan.service.currency.entity.RateEntity;
-import com.babayan.service.currency.entity.VirtualCurrency;
 import com.babayan.service.currency.repository.RateRepository;
 import com.babayan.service.currency.service.CurrencyService;
 import com.babayan.service.currency.service.RateService;
@@ -18,14 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Date;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
-
-import static com.babayan.service.currency.util.DateHelper.convertFromDate;
-import static com.babayan.service.currency.util.DateHelper.getTodayDate;
-import static com.babayan.service.currency.util.FetchCurrency.fetchFromFixerIo;
 
 /**
  * @author by artbabayan
@@ -50,74 +43,64 @@ public class RateServiceImpl implements RateService {
         this.mapper = mapper;
     }
 
+    @PostConstruct
+    private void init() {
+        _logger.info("Rate service initialized");
+    }
+
+    /**
+     * @see RateService#create(Long, Rate)
+     */
     @Transactional
     @Override
-    public Rate create(Long currencyId, Rate rate) {
-        if (rate.getId() != null) {
-            throw new ValidationException(String.format("%s not valid", rate.getId()));
+    public Rate create(Long currencyId, @Valid Rate rate) {
+        if (currencyId == null || rate.getCurrencyId() == null) {
+            throw new ValidationException("Unable to process for null ID");
         }
-        if (rate.getCurrencyId() == null) {
-            throw new ValidationException(String.format("%s not valid", rate));
+
+        if (rate.getId() != null) {
+            throw new ValidationException(String.format("Unable to verify if rate %s exists", rate.getId()));
         }
 
         Currency currency = currencyService.findById(currencyId);
         if (!currency.getId().equals(currencyId)) {
-            throw new ValidationException("ID mismatch");
+            throw new ValidationException("Rate's currency ID mismatch");
         }
 
         RateEntity rateEntity = mapper.toEntity(rate);
-        rateEntity = rateRepository.save(rateEntity);
+        try {
+            rateEntity = rateRepository.save(rateEntity);
+        } catch (Exception ex) {
+            _logger.error(ex.getMessage(), ex);
+            throw new OperationFailedException(ex);
+        }
 
         return mapper.fromEntity(rateEntity);
     }
 
+    /**
+     * @see RateService#addRates(Long, List)
+     */
     @Transactional
     @Override
     public void addRates(Long currencyId, List<Rate> rates) {
         if (currencyId == null) {
-            throw new OperationFailedException("Failed operation, null");
+            _logger.error("Unable to process for null ID");
+            throw new OperationFailedException("Unable to process for null ID");
         }
 
-        for (Rate newRate : rates) {
-            if (newRate.getCurrencyId() == null || !newRate.getCurrencyId().equals(currencyId)) {
+        for (Rate rate : rates) {
+            if (rate.getCurrencyId() == null) {
+                _logger.error("Currency not specified");
                 throw new ValidationException("Currency not specified");
             }
 
-            create(currencyId, newRate);
-        }
-    }
+            if (!rate.getCurrencyId().equals(currencyId)) {
+                _logger.error("Rate's currency ID mismatch");
+                throw new ValidationException("Rate's currency ID mismatch");
+            }
 
-    @PostConstruct
-    @Override
-    public void generateCurrencyRates() {
-        Date todayDate = getTodayDate();
-        String convertFromDate = convertFromDate(todayDate);
-        int count = currencyService.countByServiceDate(convertFromDate);
-
-        if (count == 0) {
-            VirtualCurrency virtual = fetchFromFixerIo();
-
-            Currency currency = new Currency();
-            currency.setBase(virtual.getBase());
-            currency.setServiceDate(virtual.getDate());
-
-            currency = currencyService.create(currency);
-            Long currencyId = currency.getId();
-
-            List<Rate> rates = new ArrayList<>();
-            Map<String, String> map = virtual.getRates();
-            map.forEach((name, value) -> {
-                Rate rate = new Rate();
-                rate.setName(name);
-                rate.setRate(value);
-                rate.setCurrencyId(currencyId);
-
-                rates.add(rate);
-            });
-            addRates(currency.getId(), rates);
-
-        } else if (count > 0) {
-            _logger.info("Currency base is up to date");
+            create(currencyId, rate);
         }
     }
 

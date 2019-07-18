@@ -4,8 +4,8 @@ spring:
     test-on-borrow: true
     validation-query: SELECT 1 FROM dual
     maximumPoolSize: 10
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/m_currency?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF8&autoReconnect=true&useSSL=false
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_microservice?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF8&autoReconnect=true&useSSL=false
     username: root
     password: root
   jpa:
@@ -15,12 +15,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
-
-#service:
-#  fixerio:
-#    url: http://data.fixer.io/api/latest?access_key=b11a888bc2599f57e7a37baf1f4fc410
-#
-
+fixerio:
+  service:
+    url: http://data.fixer.io/api/latest?access_key=
+    apikey: b11a888bc2599f57e7a37baf1f4fc410
 
 #  application:
 #    name: account-service

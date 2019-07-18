@@ -1,4 +1,4 @@
-package com.babayan.service.currency.entity;
+package com.babayan.service.currency.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +14,7 @@ import java.util.Map;
  */
 @Getter
 @Setter
-public class VirtualCurrency implements Serializable {
+public class FixerioCurrency implements Serializable {
 
     private String base;
 

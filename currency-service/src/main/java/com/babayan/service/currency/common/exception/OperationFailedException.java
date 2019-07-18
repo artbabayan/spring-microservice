@@ -1,8 +1,5 @@
 package com.babayan.service.currency.common.exception;
 
-/**
- *
- */
 public class OperationFailedException extends RuntimeException {
 	public OperationFailedException() {
 		super();
