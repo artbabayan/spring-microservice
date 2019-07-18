@@ -1,0 +1,15 @@
+package com.babayan.service.currency.repository;
+
+import com.babayan.service.currency.entity.CurrencyEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+/**
+ * @author by artbabayan
+ */
+@Repository
+public interface CurrencyRepository extends JpaRepository<CurrencyEntity, Long> {
+
+    int countByServiceDate(String serviceDate);
+
+}
