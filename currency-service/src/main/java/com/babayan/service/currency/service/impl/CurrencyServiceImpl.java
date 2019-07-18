@@ -2,6 +2,7 @@ package com.babayan.service.currency.service.impl;
 
 import com.babayan.service.currency.common.exception.OperationFailedException;
 import com.babayan.service.currency.common.exception.ValidationException;
+import com.babayan.service.currency.configuration.MapperConfig;
 import com.babayan.service.currency.dto.Currency;
 import com.babayan.service.currency.entity.CurrencyEntity;
 import com.babayan.service.currency.repository.CurrencyRepository;
@@ -10,6 +11,7 @@ import com.babayan.service.currency.util.mappers.CurrencyMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +35,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     private CurrencyMapper mapper;
-    @Autowired public void setMapper(CurrencyMapper mapper) {
+    @Autowired @Qualifier("currencyMapper") public void setMapper(CurrencyMapper mapper) {
         this.mapper = mapper;
     }
 

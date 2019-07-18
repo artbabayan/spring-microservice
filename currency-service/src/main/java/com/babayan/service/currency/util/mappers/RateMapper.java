@@ -12,14 +12,12 @@ import java.util.List;
 /**
  * @author by artbabayan
  */
-@Component
 public class RateMapper {
 
     private ModelMapper modelMapper;
     @Autowired public void setModelMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
-    // region <RATE TRANSFORMER>
 
     public Rate fromEntity(RateEntity rateEntity) {
         if (rateEntity == null) {

@@ -13,6 +13,7 @@ import com.babayan.service.currency.util.mappers.RateMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,7 +46,7 @@ public class RateServiceImpl implements RateService {
     }
 
     private RateMapper mapper;
-    @Autowired public void setMapper(RateMapper mapper) {
+    @Autowired @Qualifier("rateMapper") public void setMapper(RateMapper mapper) {
         this.mapper = mapper;
     }
 
