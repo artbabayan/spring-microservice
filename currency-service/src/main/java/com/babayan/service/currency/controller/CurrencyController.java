@@ -22,7 +22,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * @author by artbabayan
  */
-@RequestMapping(value = "/api/v1/currencies", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v10/currencies", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @RestController
 public class CurrencyController {
     private static final Logger _logger = LoggerFactory.getLogger(CurrencyController.class);

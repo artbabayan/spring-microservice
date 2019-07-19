@@ -16,9 +16,11 @@
     </parent>
 
     <properties>
-        <spring.boot>2.1.2.RELEASE</spring.boot>
-        <spring.boot.eureka>1.4.7.RELEASE</spring.boot.eureka>
         <java.version>1.8</java.version>
+        <spring.boot.version>2.1.2.RELEASE</spring.boot.version>
+        <spring.cloud.starter.version>2.1.2.RELEASE</spring.cloud.starter.version>
+        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+
     </properties>
 
     <modules>

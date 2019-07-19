@@ -7,7 +7,7 @@ spring:
     validation-query: SELECT 1 FROM dual
     maximumPoolSize: 10
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/spring_microservice?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF8&autoReconnect=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/spring_microservice_db?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF8&autoReconnect=true&useSSL=false
     username: root
     password: root
   jpa:

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author by artbabayan
  */
-@RequestMapping(value = "/api/v1/fixerios")
+@RequestMapping(value = "/api/v1/fixerio")
 @RestController
 public class FixerioController {
     private static final Logger _logger = LoggerFactory.getLogger(FixerioController.class);
@@ -32,7 +32,7 @@ public class FixerioController {
     /**
      *
      */
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     public void rateManualUpdate() {
         fixerioService.generateData();
     }

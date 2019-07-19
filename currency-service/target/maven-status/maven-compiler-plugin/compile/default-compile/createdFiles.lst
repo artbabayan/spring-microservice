@@ -7,9 +7,11 @@ com/babayan/service/currency/service/RateService.class
 com/babayan/service/currency/entity/RateEntity.class
 com/babayan/service/currency/configuration/DSConfig.class
 com/babayan/service/currency/util/helpers/DateHelper.class
+com/babayan/service/currency/controller/CurrencyController.class
 com/babayan/service/currency/util/helpers/CollectionHelper.class
 com/babayan/service/currency/service/fixerio/FixerioService.class
 com/babayan/service/currency/util/mappers/RateMapper.class
+com/babayan/service/currency/dto/Currency$CurrencyBuilder.class
 com/babayan/service/currency/controller/FixerioController.class
 com/babayan/service/currency/service/fixerio/FixerioServiceImpl.class
 com/babayan/service/currency/configuration/MapperConfig.class

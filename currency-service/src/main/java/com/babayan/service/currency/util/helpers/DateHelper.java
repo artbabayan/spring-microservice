@@ -10,11 +10,8 @@ import java.util.Date;
  * @author by artbabayan
  */
 public class DateHelper {
-    public static final String DF_TIME = "HH:mm:ss";
     public static final String DF_DAY = "yyyy-MM-dd";
-    public static final String DF_ISO_DATETIME = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
-    	public static final DateFormat DF_DAYY = new SimpleDateFormat("yyyy-MM-dd");
-
+    public static final DateFormat DF_DAYY = new SimpleDateFormat("yyyy-MM-dd");
 
     public static String convertFromDate(Date date) {
         // Creating date format
@@ -34,18 +31,10 @@ public class DateHelper {
     }
 
 
-
     public static Date parseDate(String dateString) {
         return parseDate(dateString, ((SimpleDateFormat) DF_DAYY).toPattern());
     }
 
-    /**
-     * Parses provided string to Date using the specified format.
-     *
-     * @param dateString
-     * @param format
-     * @return
-     */
     public static Date parseDate(String dateString, String format) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat(format);
@@ -55,16 +44,4 @@ public class DateHelper {
         }
     }
 
-
-    public static void main(String[] args) {
-        Calendar calendar = Calendar.getInstance();
-        Date time = calendar.getTime();
-
-        System.out.println(convertFromDate(time));
-
-//
-//        Date date = fromUnixTime(1563110646);
-//        System.out.println(convertFromTimeStamp(date));
-
-    }
 }
