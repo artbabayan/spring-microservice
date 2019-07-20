@@ -32,8 +32,8 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
     registerWithEureka: false
       
-#server:
-#  port: 8765
+server:
+  port: 8765
 
 microservices:
   ta-accounts:
@@ -41,7 +41,7 @@ microservices:
 
 
 
-#logging:
-#  level:
-#    ROOT: INFO
-#    org.springframework.web: DEBUG
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG

@@ -8,11 +8,10 @@ import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @EnableFeignClients(basePackages = "com.babayan.microservices.gs.client")
+@SpringBootApplication
 @EnableZuulProxy
 @RestController
-@SpringBootApplication
 public class GatewayApplication {
 
 	public static void main(String[] args) {

@@ -19,7 +19,6 @@ import java.util.List;
 @EnableJpaRepositories(basePackages = "com.babayan.service.currency.repository")
 @SpringBootApplication
 public class CurrencyApplication {
-
     private FixerioService fixerioService;
     @Autowired public void setFixerioService(FixerioService fixerioService) {
         this.fixerioService = fixerioService;

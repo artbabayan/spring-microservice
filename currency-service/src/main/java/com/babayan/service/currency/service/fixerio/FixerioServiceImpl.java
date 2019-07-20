@@ -27,9 +27,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static com.babayan.service.currency.util.helpers.DateHelper.convertFromDate;
-import static com.babayan.service.currency.util.helpers.DateHelper.getTodayDate;
-import static com.babayan.service.currency.util.helpers.JsonHelper.fromJson;
+import static com.babayan.service.currency.common.util.helpers.DateHelper.convertFromDate;
+import static com.babayan.service.currency.common.util.helpers.DateHelper.getTodayDate;
+import static com.babayan.service.currency.common.util.helpers.JsonHelper.fromJson;
 import static org.apache.http.protocol.HTTP.USER_AGENT;
 
 /**

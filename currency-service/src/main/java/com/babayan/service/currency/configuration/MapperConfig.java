@@ -1,7 +1,7 @@
 package com.babayan.service.currency.configuration;
 
-import com.babayan.service.currency.util.mappers.CurrencyMapper;
-import com.babayan.service.currency.util.mappers.RateMapper;
+import com.babayan.service.currency.common.util.mappers.CurrencyMapper;
+import com.babayan.service.currency.common.util.mappers.RateMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
