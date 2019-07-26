@@ -39,7 +39,7 @@ public class RateServiceImpl implements RateService {
     }
 
     private RateMapper mapper;
-    @Autowired @Qualifier("rateMapper") public void setMapper(RateMapper mapper) {
+    @Autowired public void setMapper(RateMapper mapper) {
         this.mapper = mapper;
     }
 

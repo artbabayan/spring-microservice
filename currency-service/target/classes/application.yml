@@ -7,7 +7,7 @@ spring:
     validation-query: SELECT 1 FROM dual
     maximumPoolSize: 10
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/spring_microservice_db?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF8&autoReconnect=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/test_currency_db?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF8&autoReconnect=true&useSSL=false
     username: root
     password: root
   jpa:
@@ -17,10 +17,15 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
+
 fixerio:
   service:
     url: http://data.fixer.io/api/latest?access_key=
     apikey: b11a888bc2599f57e7a37baf1f4fc410
+
+
+server:
+  port: 2222
 
 eureka:
   client:
@@ -30,9 +35,7 @@ eureka:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
 
-ribbon:
-  eureka:
-    enabled: true
 
-server:
-  port: ${PORT:2223}
+microservices:
+  currensy-service:
+    host: http://localhost:8015

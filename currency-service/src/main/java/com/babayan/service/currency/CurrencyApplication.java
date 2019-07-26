@@ -6,7 +6,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -15,10 +16,12 @@ import java.util.List;
 /**
  * @author by artbabayan
  */
-@EnableDiscoveryClient
+@EnableFeignClients
+@EnableEurekaClient
 @EnableJpaRepositories(basePackages = "com.babayan.service.currency.repository")
 @SpringBootApplication
 public class CurrencyApplication {
+
     private FixerioService fixerioService;
     @Autowired public void setFixerioService(FixerioService fixerioService) {
         this.fixerioService = fixerioService;
@@ -34,7 +37,7 @@ public class CurrencyApplication {
     }
 
     @Bean
-    public List<Rate> qaq() {
+    public List<Rate> fetchRates() {
         return fixerioService.generateData();
     }
 

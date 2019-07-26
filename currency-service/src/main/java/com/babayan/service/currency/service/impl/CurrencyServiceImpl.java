@@ -10,7 +10,6 @@ import com.babayan.service.currency.service.CurrencyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +19,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author by artbabayan
@@ -35,7 +35,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     private CurrencyMapper mapper;
-    @Autowired @Qualifier("currencyMapper") public void setMapper(CurrencyMapper mapper) {
+    @Autowired public void setMapper(CurrencyMapper mapper) {
         this.mapper = mapper;
     }
 
@@ -73,12 +73,13 @@ public class CurrencyServiceImpl implements CurrencyService {
      */
     @Override
     public Currency findById(Long id) {
-        CurrencyEntity entity = repository.findOne(id);
-        if (entity == null) {
+        Optional<CurrencyEntity> optional = repository.findById(id);
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException(String.format("Currency with id %s not found", id));
+
         }
 
-        return mapper.fromEntity(entity);
+        return mapper.fromEntity(optional.get());
     }
 
     /**
@@ -95,7 +96,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     @Override
     public void deleteById(Long id) {
         try {
-            repository.delete(id);
+            repository.deleteById(id);
         } catch (DataAccessException ex) {
             _logger.error(ex.getMessage(), ex);
             throw new OperationFailedException(ex);

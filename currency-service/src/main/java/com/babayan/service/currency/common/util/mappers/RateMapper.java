@@ -4,6 +4,7 @@ import com.babayan.service.currency.dto.Rate;
 import com.babayan.service.currency.entity.RateEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * @author by artbabayan
  */
+@Component
 public class RateMapper {
 
     private ModelMapper modelMapper;

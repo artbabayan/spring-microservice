@@ -28,6 +28,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <version>2.1.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-sleuth</artifactId>
         </dependency>
         <dependency>
@@ -35,6 +40,7 @@
             <artifactId>spring-cloud-sleuth-zipkin</artifactId>
         </dependency>
 
+        <!--Spring Boot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -48,13 +54,19 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+
+        <!--?????????-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!-- Apache HttpClient -->
@@ -76,6 +88,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -111,7 +124,7 @@
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <compilerArguments>
-                        <Xlint />
+                        <Xlint/>
                     </compilerArguments>
                     <verbose>true</verbose>
                     <source>${java.version}</source>
@@ -133,8 +146,9 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
                 <configuration>
+                    <mainClass>com.babayan.service.currency.CurrencyApplication</mainClass>
                     <addResources>true</addResources>
-                    <excludeDevtools>true</excludeDevtools>
+                    <!--<excludeDevtools>true</excludeDevtools>-->
                 </configuration>
                 <executions>
                     <execution>
@@ -146,5 +160,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
